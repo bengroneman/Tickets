@@ -25,14 +25,15 @@ SECRET_KEY = 'django-insecure-c_)ffwdv3nbde6ftj=-(uy=o$1xgsq1ex7xf33^9heqhbpa14c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*localhost:3000', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*localhost:3000', '127.0.0.1', 'localhost', 'swordofvim.pythonanywhere.com']
 
 CORS_ALLOWED_ORIGINS = [
     "https://bluedojo.dev",
     "https://tickets.bluedojo.dev",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost"
+    "http://localhost",
+    "http://swordofvim.pythonanywhere.com"
 ]
 
 
