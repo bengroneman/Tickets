@@ -1,0 +1,13 @@
+<template>
+  <div>
+    <HeroSection title="Report a Bug">
+      <p>Describe the issue you have experienced in detail</p>
+    </HeroSection>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <TicketForm>
+        </TicketForm>
+      </div>
+    </div>
+  </div>
+</template>
