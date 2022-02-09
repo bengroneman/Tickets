@@ -13,14 +13,12 @@ with open('/home/swordOfVim/secret.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*localhost:3000', '127.0.0.1', 'localhost', 'swordofvim.pythonanywhere.com']
+ALLOWED_HOSTS = ['swordofvim.pythonanywhere.com', 'brave-newton-e914b3.netlify.app']
 
 CORS_ALLOWED_ORIGINS = [
     "https://bluedojo.dev",
     "https://tickets.bluedojo.dev",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost",
+    "https://brave-newton-e914b3.netlify.app",
     "http://swordofvim.pythonanywhere.com"
 ]
 
