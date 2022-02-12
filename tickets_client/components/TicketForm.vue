@@ -149,7 +149,7 @@ export default {
         subject: '',
         email: '',
         full_name: '',
-        summary: 'd ,
+        summary: '',
         attachment: ''
       }
     }
