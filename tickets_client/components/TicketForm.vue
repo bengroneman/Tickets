@@ -149,14 +149,14 @@ export default {
         subject: '',
         email: '',
         full_name: '',
-        summary: '',
+        summary: 'd ,
         attachment: ''
       }
     }
   },
   methods: {
     submitTicket () {
-      const url = 'http://127.0.0.1:8000/tickets/api/v1/tickets/'
+      const url = 'https://swordofvim.pythonanywhere.com/tickets/api/v1/tickets/'
 
       const options = {
         method: 'POST',
