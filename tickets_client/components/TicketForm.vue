@@ -156,8 +156,8 @@ export default {
   },
   methods: {
     submitTicket () {
-      const url = 'https://swordofvim.pythonanywhere.com/tickets/api/v1/tickets/'
-
+      // const url = 'https://swordofvim.pythonanywhere.com/tickets/api/v1/tickets/'
+      const url = 'https://localhost:8000/tickets/api/tickets'
       const options = {
         method: 'POST',
         body: JSON.stringify(this.form),
