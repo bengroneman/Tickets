@@ -2,17 +2,81 @@
 {% load static %}
 {% block content %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 
-<canvas id="myChart" width="400" height="400"></canvas>
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="h-80 w-80">
+         <canvas
+          id="myChart"
+          width="200"
+          height="200"
+          class="bg-white rounded-lg shadow divide-y divide-gray-200"
+        ></canvas>
+    </div>
+    <div>
+        <canvas
+          id="myChart1"
+          width="200"
+          height="200"
+          class="bg-white rounded-lg shadow divide-y divide-gray-200"
+        ></canvas>
+    </div>
+    <div>
+        <canvas
+          id="myChart2"
+          width="200"
+          height="200"
+          class="bg-white rounded-lg shadow divide-y divide-gray-200"
+        ></canvas>
+    </div>
+</div>
 <script>
-const ctx = document.getElementById('myChart').getContext('2d');
+const STATUS_CHOICES = [
+    'open',
+    'wip',
+    'pend',
+    'cancel',
+    'complete',
+    'closed'
+]
+const URGENCY_CHOICES = [
+    'high',
+    'medium',
+    'low'
+]
+const BUCKET_CHOICES = [
+    'quality',
+    'engineering',
+    'unassigned'
+]
+
+let tickets;
+fetch('/tickets/api/v1/tickets/', options={'method': 'GET'})
+.then(response => tickets = response.json())
+.catch(error => console.error('Error:', error));
+console.log(tickets);
+let open_tickets = tickets.filter(ticket => ticket.status === 'open');
+let wip_tickets = tickets.filter(ticket => ticket.status === 'wip');
+let pending_tickets = tickets.filter(ticket => ticket.status === 'pend');
+let canceled_tickets = tickets.filter(ticket => ticket.status === 'cancel');
+let completed_tickets = tickets.filter(ticket => ticket.status === 'complete');
+let closed_tickets = tickets.filter(ticket => ticket.status === 'tickets');
+
+const ctx = document.getElementById('ticket_status_distribution').getContext('2d');
 const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: STATUS_CHOICES,
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Ticket Status Distribution',
+            data: [
+                open_tickets.length,
+                wip_tickets.length,
+                pending_tickets.length,
+                canceled_tickets.length,
+                completed_tickets.length,
+                closed_tickets.length
+            ],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
