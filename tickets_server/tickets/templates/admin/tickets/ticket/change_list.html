@@ -1,0 +1,131 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js" integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/min/moment.min.js"></script>
+
+<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="h-80 w-80">
+         <canvas
+          id="ticket_status_distribution"
+          width="200"
+          height="200"
+          class="bg-white rounded-lg shadow divide-y divide-gray-200"
+        ></canvas>
+    </div>
+    <div>
+        <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+          <dt class="text-sm font-medium text-gray-500 truncate">Tickets opened this week</dt>
+          <dd class="mt-1 text-3xl font-semibold text-gray-900" id="opened-ticket-count"></dd>
+        </div>
+    </div>
+    <div>
+        <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+          <dt class="text-sm font-medium text-gray-500 truncate">Tickets closed this week</dt>
+          <dd class="mt-1 text-3xl font-semibold text-gray-900" id="closed-ticket-count"></dd>
+        </div>
+    </div>
+    <div class="hidden">
+        {{ tickets|json_script:"tickets" }}
+    </div>
+</div>
+
+<script>
+const STATUS_CHOICES = [
+    'open',
+    'wip',
+    'pend',
+    'cancel',
+    'complete',
+    'closed'
+]
+const URGENCY_CHOICES = [
+    'high',
+    'medium',
+    'low'
+]
+const BUCKET_CHOICES = [
+    'quality',
+    'engineering',
+    'unassigned'
+]
+
+const tickets = JSON.parse(document.getElementById('tickets').text)
+
+let open_tickets = _.filter(tickets, (ticket) => ticket.status === 'open');
+let wip_tickets = _.filter(tickets, (ticket) => ticket.status === 'wip');
+let pending_tickets = _.filter(tickets, (ticket) => ticket.status === 'pend');
+let canceled_tickets = _.filter(tickets, (ticket) => ticket.status === 'cancel');
+let completed_tickets = _.filter(tickets, (ticket) => ticket.status === 'complete');
+let closed_tickets = _.filter(tickets, (ticket) => ticket.status === 'tickets');
+
+const ctx1 = document.getElementById('ticket_status_distribution').getContext('2d');
+const ticket_status_distribution_chart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: STATUS_CHOICES,
+        datasets: [{
+            label: 'Ticket Status Distribution',
+            data: [
+                open_tickets.length,
+                wip_tickets.length,
+                pending_tickets.length,
+                canceled_tickets.length,
+                completed_tickets.length,
+                closed_tickets.length
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+let ticket_closed_count_element = document.getElementById("closed-ticket-count")
+const today = new Date()
+const seven_days_ago = moment(today).subtract(7, 'day')
+
+const tickets_closed_this_week = _.filter(tickets, (t) => {
+    let updated_in_last_week = moment(t.updated_at) >= seven_days_ago
+    if (updated_in_last_week && t.status === 'closed') {
+        return t
+    }
+})
+ticket_closed_count_element.innerText = tickets_closed_this_week.length
+
+let tickets_opened_count_element = document.getElementById("opened-ticket-count")
+
+const tickets_opened_this_week = _.filter(tickets, (t) => {
+    let updated_in_last_week = moment(t.updated_at) >= seven_days_ago
+    if (updated_in_last_week && t.status !== 'closed') {
+        return t
+    }
+})
+tickets_opened_count_element.innerText = tickets_opened_this_week.length
+</script>
+
+{{ block.super }}
+{% endblock %}

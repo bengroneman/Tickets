@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,10 +9,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open('/home/swordOfVim/secret.txt') as f:
-    SECRET_KEY = f.read().strip()
+with open(f'{BASE_DIR}/../secrets.json') as f:
+    secrets = json.loads(f.read())
+    SECRET_KEY = secrets['SECRET_KEY']
+    MODE = secrets['MODE']
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if MODE == 'dev' else False
 
 ALLOWED_HOSTS = ['swordofvim.pythonanywhere.com', 'brave-newton-e914b3.netlify.app']
 
@@ -22,6 +26,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://swordofvim.pythonanywhere.com"
 ]
 
+if MODE == 'dev':
+    ALLOWED_HOSTS = ['*']
+    CORS_ALLOWED_ORIGINS = ["https://*", "http://*"]
 
 # Application definition
 
@@ -117,7 +124,7 @@ USE_TZ = True
 STATIC_ROOT = "/home/swordOfVim/Tickets/tickets_server/static"
 
 STATIC_URL = 'static/'
-
+APPEND_SLASH = False
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
