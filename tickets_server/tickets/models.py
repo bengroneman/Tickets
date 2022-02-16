@@ -29,6 +29,8 @@ class Ticket(models.Model):
         ('unassigned', 'Unassigned'),
     ]
     ticket_number = models.BigAutoField(primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     subject = models.CharField(max_length=100, default="NO Subject")
     summary = models.CharField(max_length=500, default="NO Summary")
     email = models.ForeignKey(Person, on_delete=models.CASCADE)

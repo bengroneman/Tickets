@@ -4,6 +4,7 @@ from .serializers import TicketSerializer
 
 
 class TicketAdmin(admin.ModelAdmin):
+    readonly_fields = ("created_at", "updated_at")
     list_display = ('ticket_number', 'subject', 'summary', 'status', 'email', 'urgency', 'bucket')
     list_filter = ('status', 'bucket')
     search_fields = ('ticket_number', 'summary', 'subject')
