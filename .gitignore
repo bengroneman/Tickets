@@ -228,3 +228,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 */static/
+secrets.json

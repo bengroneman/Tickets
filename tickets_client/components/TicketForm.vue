@@ -3,21 +3,40 @@
     <div class="space-y-8">
       <div>
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-          <div class="sm:col-span-6">
-            <label for="summary" class="block text-md font-medium text-gray-700">
+          <div class="relative border w-full sm:col-span-6 border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label
+              for="subject"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+            >
+              Subject
+            </label>
+            <input
+              id="subject"
+              v-model="form.subject"
+              type="text"
+              name="subject"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              placeholder="Something Broken"
+            >
+            </input>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+          <div class="relative border w-full sm:col-span-6 border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label
+              for="summary"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+            >
               Summary
             </label>
-            <p class="text-gray-500">
-              Describe the issue you are experiencing
-            </p>
-            <div class="mt-1">
-              <textarea
-                id="summary"
-                v-model="form.summary"
-                name="summary"
-                rows="3"
-                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md" />
-            </div>
+            <textarea
+              id="summary"
+              v-model="form.summary"
+              name="summary"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              rows="3"
+              placeholder="Describe your issue in detail"
+            />
           </div>
         </div>
       </div>
@@ -29,31 +48,40 @@
           </h3>
         </div>
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <label for="full-name" class="block text-sm font-medium text-gray-700">
+          <div class="sm:col-span-3 relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label
+              for="full_name"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+            >
               Full name
             </label>
-            <div class="mt-1">
-              <input type="text"
-                     id="full-name"
-                     v-model="form.full_name"
-                     name="full-name"
-                     autocomplete="given-name"
-                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
-            </div>
+            <input
+              id="full_name"
+              v-model="form.full_name"
+              type="text"
+              name="full_name"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              placeholder="How shall we address you?"
+            >
+            </input>
           </div>
-          <div class="sm:col-span-3">
-            <label for="email" class="block text-sm font-medium text-gray-700">
+          <div class="sm:col-span-3 relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label
+              for="full_name"
+              class="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+            >
               Email address
             </label>
-            <div class="mt-1">
-              <input id="email"
-                     name="email"
-                     v-model="form.email"
-                     type="email"
-                     autocomplete="email"
-                     class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
-            </div>
+            <input
+              id="email"
+              v-model="form.email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              placeholder="Where can we reach you?"
+            >
+            </input>
           </div>
         </div>
       </div>
@@ -61,7 +89,9 @@
         <label for="file-upload" class="block text-md font-medium text-gray-700">
           Attachments
         </label>
-        <p class="text-gray-500">Attach any images, errors, or relevenat media for the issue</p>
+        <p class="text-gray-500">
+          Attach any images, errors, or relevant media for the issue
+        </p>
         <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
           <div class="space-y-1 text-center">
             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -74,9 +104,13 @@
                   id="file-upload"
                   name="file-upload"
                   type="file"
-                  class="sr-only" />
+                  class="sr-only"
+                >
+                </input>
               </label>
-              <p class="pl-1">or drag and drop</p>
+              <p class="pl-1">
+                or drag and drop
+              </p>
             </div>
             <p class="text-xs text-gray-500">
               PNG, JPG, GIF up to 10MB
@@ -88,14 +122,18 @@
 
     <div class="pt-5">
       <div class="flex justify-end">
-        <button type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <button
+          type="button"
+          class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
           Cancel
         </button>
         <button
           type="button"
+          class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           @click="submitTicket"
-          class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Save
+        >
+          Submit
         </button>
       </div>
     </div>
@@ -108,16 +146,18 @@ export default {
   data () {
     return {
       form: {
+        subject: '',
         email: '',
         full_name: '',
-        summary: ''
+        summary: '',
+        attachment: ''
       }
     }
   },
   methods: {
     submitTicket () {
-      const url = 'https://swordofvim.pythonanywhere.com/tickets/api/v1/tickets/'
-
+      const url = 'https://swordofvim.pythonanywhere.com/tickets/api/tickets/'
+      //const url = 'https://localhost:8000/tickets/api/tickets'
       const options = {
         method: 'POST',
         body: JSON.stringify(this.form),
@@ -125,7 +165,6 @@ export default {
           'Content-Type': 'application/json'
         }
       }
-      console.log(options)
       fetch(url, options)
         .then(response => response.json())
         .then(data => console.log(data))

@@ -5,17 +5,19 @@
         <span class="rounded-lg inline-flex p-3 bg-teal-50 text-teal-700 ring-4 ring-white">
           <!-- Heroicon name: outline/clock -->
           <svg
-
             class="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            aria-hidden="true" >
-            <path stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
         </span>
       </div>
@@ -23,7 +25,7 @@
         <h3 class="text-lg font-medium">
           <a href="/report-ticket" class="focus:outline-none">
             <!-- Extend touch target to entire panel -->
-            <span class="absolute inset-0" aria-hidden="true"></span>
+            <span class="absolute inset-0" aria-hidden="true" />
             Report a Bug
           </a>
         </h3>
@@ -42,21 +44,23 @@
       <div>
         <span class="rounded-lg inline-flex p-3 bg-purple-50 text-purple-700 ring-4 ring-white">
           <!-- Heroicon name: outline/badge-check -->
-          <svg class="h-6 w-6"
-               xmlns="http://www.w3.org/2000/svg"
-               fill="none"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
-               aria-hidden="true">
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
           </svg>
         </span>
       </div>
       <div class="mt-8">
         <h3 class="text-lg font-medium">
-          <a href="#" class="focus:outline-none">
+          <a href="/feature-request" class="focus:outline-none">
             <!-- Extend touch target to entire panel -->
-            <span class="absolute inset-0" aria-hidden="true"></span>
+            <span class="absolute inset-0" aria-hidden="true" />
             Feature Request
           </a>
         </h3>
