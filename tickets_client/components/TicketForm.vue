@@ -11,12 +11,23 @@
               Subject
             </label>
             <input
+              v-if="isFeatureRequest"
               id="subject"
               v-model="form.subject"
               type="text"
               name="subject"
               class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-              placeholder="Something Broken"
+              placeholder="e.g. Feature Request:"
+            >
+            </input>
+            <input
+              v-else
+              id="subject"
+              v-model="form.subject"
+              type="text"
+              name="subject"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              placeholder="e.g. Something Broken"
             >
             </input>
           </div>
@@ -30,6 +41,16 @@
               Summary
             </label>
             <textarea
+              v-if="isFeatureRequest"
+              id="summary"
+              v-model="form.summary"
+              name="summary"
+              class="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+              rows="3"
+              placeholder="Describe your creative idea in detail"
+            />
+            <textarea
+              v-else
               id="summary"
               v-model="form.summary"
               name="summary"
@@ -125,6 +146,7 @@
         <button
           type="button"
           class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          @click="clearForm"
         >
           Cancel
         </button>
@@ -143,6 +165,12 @@
 <script>
 
 export default {
+  props: {
+    isFeatureRequest: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       form: {
@@ -157,7 +185,7 @@ export default {
   methods: {
     submitTicket () {
       const url = 'https://swordofvim.pythonanywhere.com/tickets/api/tickets/'
-      //const url = 'https://localhost:8000/tickets/api/tickets'
+      // const url = 'https://localhost:8000/tickets/api/tickets'
       const options = {
         method: 'POST',
         body: JSON.stringify(this.form),
@@ -169,6 +197,15 @@ export default {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.log(error))
+    },
+    clearForm () {
+      this.form = {
+        subject: '',
+        email: '',
+        full_name: '',
+        summary: '',
+        attachment: ''
+      }
     }
   }
 }
